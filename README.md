@@ -12,6 +12,8 @@ To use this, you must:
 
 5. When the folders are in place, make sure that they are given proper permissions. If they are not, you may use chmod +x to give the files proper permissions.
 
+6. Run wifiFirmwareUpdater AS ROOT, or it won't work.
+
 If you're curious to exactly which files your device uses, you can run a script that I included with this project, wifioutput. Some iPhone 7's use different wifi firmware, and this is why some IPSW's contain more folders in /usr/share/firmware/wifi.
 
 My script parses the output of /usr/libexec/wifiFirmwareLoader -f (or /usr/libexec/wifiFirmwareLoaderLegacy -f) to find these files and then properly uses them to load whichever wifi firmware is present based on name. DO NOT CHANGE THE NAME OF THE FILES, OR THIS WON'T WORK.
