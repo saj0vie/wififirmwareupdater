@@ -1,5 +1,7 @@
 # wifiFirmwareUpdater
 
+DISCLAIMER: I just rewrote this, but I have no jailbroken devices to test this on. There is a chance that something simple as syntax is wrong with the script. Please let me know if you receive errors.
+
 To use this, you must:
 
 1. Install the .deb file on a jailbroken 64 bit iPhone (no iPads or iPods are tested).
