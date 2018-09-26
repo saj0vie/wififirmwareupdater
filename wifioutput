@@ -1,0 +1,42 @@
+echo "After this command is ran, screenshot the output and send it to u/saj0vie. This checks which wifi firmware your device uses."
+
+sleep 3
+
+echo "Checking for wifiFirmwareLoaderLegacy"
+
+sleep 3
+
+legacyFile="/usr/libexec/wifiFirmwareLoaderLegacy"
+
+if [ -e $legacyFile ] ;
+then
+	
+	echo "wifiFirmwareLoaderLegacy does exist. This should only happen on iPhone 5s."
+
+	sleep 1
+
+	echo "Reading for which firmware to use..."
+
+	sleep 1
+
+	/usr/libexec/wifiFirmwareLoaderLegacy -f
+
+	echo "Send the output created above to u/saj0vie."
+
+	exit 0
+else
+
+	echo "wifiFirmwareLoaderLegacy doesn't exist. This is normal because only older iPhone 5s models have this."
+
+	sleep 1
+
+	echo "Reading for which firmware to use..."
+
+	sleep 1
+
+	/usr/libexec/wifiFirmwareLoader -f
+
+	echo "Send the output created above to u/saj0vie."
+
+	exit 0
+fi

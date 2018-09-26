@@ -1,0 +1,70 @@
+echo "wifiFirmwareUpdater 2 by saj0vie"
+
+sleep 1 
+
+echo "Disclaimer: I don't own the firmware files that are loaded using this tool."
+
+sleep 1
+
+echo "Only compatible with 64 bit iPhones. No iPads yet."
+
+sleep 1
+
+echo "If anything goes wrong using this tool, such as WiFi not functioning, reboot your iPhone and it will be fixed."
+
+sleep 1
+
+echo "Begin Loading iOS 12.0 WiFi firmware? Respond with '1' for yes or '2' for no."
+
+read response
+
+if [ $response -eq 1 ] ;
+then
+
+	echo "Checking for wifiFirmwareLoader Legacy."
+
+	sleep 1
+
+	legacyFile="/usr/libexec/wifiFirmwareLoaderLegacy"
+
+	if [ -e $legacyFile ] ;
+	then
+		
+		FW=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep Firm | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		NV=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep NVRAM | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		REG=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep Regula | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		TXCAP=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep TxCap | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+
+		echo "Loading iOS 12.0 WiFi firmware using wifiFirmwareLoaderLegacy. THIS SHOULD ONLY HAPPEN ON IPHONE 5S."
+		
+		/usr/libexec/wifiFirmwareLoaderLegacy -r -F /var/mobile/wififirmware/$FW -N /var/mobile/wififirmware/$NV
+		
+		echo "iOS 12.0 WiFi firmware has been loaded."
+		
+		exit 0
+	else
+
+		FW=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep Firm | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		NV=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep NVRAM | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		REG=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep Regula | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+		TXCAP=$( /usr/libexec/wifiFirmwareLoaderLegacy -f | grep TxCap | grep -v \"\" | sed -e 's/.*wifi\/\(.*\)\".*/\1/')
+
+		echo "Loading iOS 12.0 WiFi firmware using wifiFirmwareLoader."
+
+		/usr/libexec/wifiFirmwareLoader -r -F /var/mobile/updatedWifiFirmware/$FW -N /var/mobile/updatedWifiFirmware/$NV -R /var/mobile/updatedWifiFirmware/$REG -T /var/mobile/updatedWifiFirmware/$TXCAP
+
+		echo "iOS 12.0 WiFi firmware has been loaded."
+
+		exit 0
+
+	fi
+
+elif [ $response -eq 2 ] ;
+then
+	
+	echo "Canceled."
+	exit 0
+else
+	echo "Invalid response. Type '1' to indicate yes, or '2' to indicate no."
+	exit 0
+fi
